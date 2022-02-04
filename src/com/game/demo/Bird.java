@@ -116,9 +116,6 @@ public class Bird {
 
     // x 位于窗口 1/4 处, y 位于窗口纵向 1/2 处
     g.drawImage(this.image, x - imageWidth, y - imageHeight, null);
-
-    g.setColor(Color.red);
-    g.drawRect(rect.x, rect.y, rect.width, rect.height);
   }
 
   private void movement() {

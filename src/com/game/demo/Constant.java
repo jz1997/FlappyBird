@@ -109,6 +109,11 @@ public class Constant {
   public static final int GROUND_HEIGHT = 35;
 
   /**
+   * 生成的水管距离窗口最优的距离
+   */
+  public static final int PIPES_BETWEEN_WIDTH = 160;
+
+  /**
    * 图片类型
    */
   public static final String[] CLOUD_IMG_PATH = new String[]{"resources/img/cloud_0.png",
@@ -132,6 +137,11 @@ public class Constant {
   public static final String[] PIPE_IMG_PATH = {"resources/img/pipe.png",
     "resources/img/pipe_top.png",
     "resources/img/pipe_bottom.png"};
+
+  public static final String PIPE_BODY_IMG_PATH = "resources/img/pipe.png";
+  public static final String PIPE_TOP_HEAD_IMG_PATH = "resources/img/pipe_top.png";
+  public static final String PIPE_BOTTOM_HEAD_IMG_PATH = "resources/img/pipe_bottom.png";
+
 
   /**
    * flay 音乐文件路径

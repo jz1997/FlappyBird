@@ -57,7 +57,7 @@ public class GameOverAnimation {
     int scoreTextHeight = GameUtil.getStringHeight(Constant.SCORE_FONT, scoreText);
     int scoreTextX =
       (Constant.FRAME_WIDTH - scoreImage.getWidth() / 2 >> 1) - (scoreTextWidth >> 1) + 5;
-    int scoreTextY = scoreImgY + (this.scoreImage.getHeight() >> 1) + (scoreTextHeight >> 1);
+    int scoreTextY = scoreImgY + (this.scoreImage.getHeight() >> 1) + (scoreTextHeight >> 1) + 10;
 
     g.setColor(Color.white);
     g.setFont(Constant.SCORE_FONT);

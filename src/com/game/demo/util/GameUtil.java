@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class GameUtil {
 
-  private static Logger log = Logger.getLogger("GameUtil");
+  private final static Logger log = Logger.getLogger("GameUtil");
 
   public static BufferedImage loadImageFrom(String path) {
     BufferedImage image;
@@ -27,7 +27,7 @@ public class GameUtil {
     } catch (IOException e) {
       log.severe(() -> String.format(
         "loadImageFrom() called with exception => parameters = [path = %s], exception = %s", path,
-        e.toString()));
+        e));
       return null;
     }
     return image;

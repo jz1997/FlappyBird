@@ -1,7 +1,6 @@
 package com.game.demo;
 
 import com.game.demo.score.ScoreCounter;
-import com.game.demo.util.GameUtil;
 import com.game.demo.util.MusicUtil;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -15,9 +14,7 @@ import java.util.List;
  */
 public class GamePipes {
 
-  private List<Pipe> pipes;
-
-  private static final int PIPES_BETWEEN_WIDTH = 160;
+  private List<AbstractPipe> pipes;
 
   private final ScoreCounter scoreCounter = ScoreCounter.getInstance();
 
@@ -28,7 +25,7 @@ public class GamePipes {
   public void draw(Graphics g, Bird bird) {
     removePipe();
     generatePipe(bird);
-    for (Pipe pipe : pipes) {
+    for (AbstractPipe pipe : pipes) {
       pipe.draw(g, bird);
     }
 
@@ -42,7 +39,7 @@ public class GamePipes {
     if (bird.isDead()) {
       return;
     }
-    for (Pipe pipe : pipes) {
+    for (AbstractPipe pipe : pipes) {
       if (pipe.isCollied(bird.getRect())) {
         // 碰撞了
         bird.birdDeadFall();
@@ -59,8 +56,8 @@ public class GamePipes {
       return;
     }
 
-    for (Pipe pipe : pipes) {
-      if (!pipe.isScore() && pipe.getRightX() <= bird.getX()) {
+    for (AbstractPipe pipe : pipes) {
+      if (pipe.canScore() && pipe.getRightX() <= bird.getX()) {
         MusicUtil.playStore();
         scoreCounter.increaseScore();
         pipe.setScored();
@@ -83,15 +80,14 @@ public class GamePipes {
     if (pipes.isEmpty()) {
       flag = true;
     } else {
-      Pipe lastPipe = pipes.get(pipes.size() - 1);
+      AbstractPipe lastPipe = pipes.get(pipes.size() - 1);
       if (lastPipe.isInFrame()) {
         flag = true;
       }
     }
 
     if (flag) {
-      int topHeight = GameUtil.getRandomNumber(Pipe.MIN_HEIGHT, Pipe.MAX_HEIGHT);
-      Pipe pipe = new Pipe(Constant.FRAME_WIDTH + PIPES_BETWEEN_WIDTH, topHeight);
+      AbstractPipe pipe = PipeFactory.createRandomPipe();
       pipes.add(pipe);
     }
   }
@@ -103,7 +99,7 @@ public class GamePipes {
     if (pipes.isEmpty()) {
       return;
     }
-    pipes.removeIf(Pipe::isOutOfFrame);
+    pipes.removeIf(AbstractPipe::isOutOfFrame);
   }
 
   public void reset() {
